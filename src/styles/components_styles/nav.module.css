@@ -1,0 +1,99 @@
+.nav{
+    margin: 0 24px 0 0;
+    padding: 32px 24px 0px 24px;
+
+    font-size: 18;
+
+    min-width: 200px;
+    z-index: 999;
+    
+    background-color: #0D1117;
+    border-left: #3D444D solid 2px;
+    border-right: #3D444D solid 2px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+    .top_navigates{
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+        .top_navigates > span{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
+
+            font-family: "Roboto Mono Light";
+        }
+        .top_navigates > div{
+            font-size: 18;
+            font-family: "Roboto Mono Thin";
+            font-weight: 100;
+            color: lightgray;
+
+            margin-left: 28px;
+        }
+
+    .bottom_options{
+        padding-bottom: 32px;
+    }
+
+        .bottom_options > span{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
+
+            font-family: "Roboto Mono Light";
+        }
+
+            .acount_plate{
+                border: #3D444D 2px solid;
+                border-radius: 8px;
+
+                display: flex;
+                flex-direction: row;
+                gap: 12px;
+                justify-content: flex-start;
+                align-items: center;
+
+                padding: 12px;
+                margin-top: 24px;
+            }
+                .right_peace{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 4px;
+                    justify-content: space-between;
+
+                    width: 100%;
+                }
+
+                    .who_is{
+                        font-size: 12;
+                        color: gray;
+                    }
+                    
+                    .pib_holder{
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                    }
+                        .pib{
+                            font-size: 15;
+                        }
+                            .pib > a {
+                                color: white;
+                                text-decoration: none;
+                            }
+
+.top_navigates > span > a,.bottom_options > span > a{
+    color: white;
+    text-decoration: none;
+}

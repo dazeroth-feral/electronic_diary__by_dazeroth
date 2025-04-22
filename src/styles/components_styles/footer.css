@@ -1,0 +1,19 @@
+.footer{
+    margin: 0;
+    padding: 12px 0;
+
+    text-align: center;
+
+    background-color: #0D1117;
+    color: #9198A1;
+
+    position: relative;
+}
+
+.footer__site_license{
+    font-size: 16;
+
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100%);
+}
