@@ -1,0 +1,21 @@
+[
+    {
+        "student_id": 1,
+        "student_name": "dazeroth",
+        "student_grades": [
+            {
+                "discipline_id": 1,
+                "tasks": [
+                    {
+                        "task_id": 0,
+                        "task_grade": 5
+                    },
+                    {
+                        "task_id": 1,
+                        "task_grade": 4
+                    }
+                ]
+            }
+        ]
+    }
+]

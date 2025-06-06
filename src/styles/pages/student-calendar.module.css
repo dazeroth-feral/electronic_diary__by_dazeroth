@@ -1,0 +1,111 @@
+.container {
+  padding: 2rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.calendarSection {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.calendarBox {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.5rem;
+  padding: 1rem;
+  border: 1px solid #444;
+  border-radius: 0.5rem;
+  width: 300px;
+}
+
+.day {
+  padding: 0.5rem;
+  text-align: center;
+  background-color: #222;
+  border-radius: 0.3rem;
+}
+
+.subjectsBox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  border: 1px solid #444;
+  border-radius: 0.5rem;
+  flex-grow: 1;
+}
+
+.subjectBtn {
+  background-color: #111;
+  color: white;
+  border: 1px solid #555;
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.yearRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.year {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.monthsBox {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.month {
+  padding: 0.5rem;
+  background-color: #222;
+  border-radius: 0.3rem;
+  width: 2.5rem;
+  text-align: center;
+}
+
+/* ... поточні стилі залишаються без змін */
+
+.taskPopup {
+  background-color: #111;
+  border: 1px solid #555;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-top: 1rem;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.taskItem {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #333;
+}
+
+.activeMonth {
+  background-color: #444;
+  font-weight: bold;
+}
+
+.activeDay {
+  background-color: #555;
+  font-weight: bold;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

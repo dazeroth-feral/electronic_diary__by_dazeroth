@@ -1,0 +1,114 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-width: 60dvw;
+    color: white;
+  }
+  
+  .header {
+    height: 40px;
+    background-color: #1b1c20;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #aaa;
+  }
+  
+  .container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .box {
+    width: 100%;
+    max-width: 400px;
+    padding: 24px;
+    background-color: transparent;
+    text-align: center;
+  }
+  
+  .title {
+    font-size: 24px;
+    margin-bottom: 32px;
+  }
+  .title span {
+    font-size: 14px;
+    display: block;
+    color: #666;
+  }
+  
+  .form {
+    background-color: #151B23;
+    padding: 24px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border: #3D444D solid 2px;
+  }
+  
+  .subtitle {
+    font-size: 18px;
+    margin-bottom: 24px;
+  }
+  
+  .input {
+    padding: 10px 12px;
+    border-radius: 4px;
+    border: 1px solid #333;
+    background-color: #151B23;
+    color: white;
+    font-size: 14px;
+  }
+  
+  .forgot {
+    text-align: right;
+    font-size: 12px;
+  }
+  .forgot a {
+    color: #72a4f5;
+    text-decoration: none;
+  }
+  .forgot a:hover {
+    text-decoration: underline;
+  }
+  
+  .button {
+    margin-top: 8px;
+    padding: 10px;
+    border: none;
+    background-color: #27a844;
+    color: white;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .button:hover {
+    background-color: #218838;
+  }
+  
+  .register {
+    font-size: 13px;
+    margin-top: 8px;
+    padding: 16px;
+    border: #3D444D solid 2px;
+    border-radius: 8px;
+}
+  .register a {
+    color: #72a4f5;
+    text-decoration: none;
+  }
+  .register a:hover {
+    text-decoration: underline;
+  }
+  
+  .footer {
+    margin-top: 24px;
+    font-size: 12px;
+    color: #555;
+  }
+  

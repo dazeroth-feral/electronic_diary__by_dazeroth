@@ -1,0 +1,39 @@
+[
+  {
+    "id": 1,
+    "name": "dazeroth",
+    "phone": "+380984932106",
+    "gender": "male",
+    "email": "dazeroth.feral@gmail.com",
+    "description": "test1",
+    "avatar": "",
+    "schools": [
+      1,
+      2
+    ],
+    "desciplines": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "id": 2,
+    "name": "dazeroth",
+    "phone": "+380984932106",
+    "gender": "male",
+    "email": "dazeroth.feral@gmail.com",
+    "description": "test",
+    "avatar": "",
+    "schools": [
+      1,
+      2
+    ],
+    "desciplines": [
+      1,
+      2
+    ]
+  }
+]
