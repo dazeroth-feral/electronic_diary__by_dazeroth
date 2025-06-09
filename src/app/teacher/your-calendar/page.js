@@ -8,9 +8,6 @@ import styles from '@/styles/pages/student-calendar.module.css';
 export default function StudentCalendar() {
     const daysInMonth = 30;
 
-    let disciplines_mass = [];
-    let days_mass = [];
-
     const { data: session, status } = useSession();
 
     const [all_disciplines, setDisciplines] = useState([]);
@@ -40,7 +37,7 @@ export default function StudentCalendar() {
                 set__user_data(user)
                 setTasks(tasks);
 
-                fetch(`/api/student-all-disciplines?id=${session.user.id}`)
+                fetch(`/api/student-all-disciplines-from-id?id=${session.user.id}`)
                     .then(res => res.json())
                     .then(allDisciplines => setDisciplines(allDisciplines))
                     .catch(err => console.error("Помилка при завантаженні дисциплін:", err));
@@ -53,7 +50,7 @@ export default function StudentCalendar() {
 
     return (
         <div className={styles.container}>
-            <h2 className={styles.title}>Учням: Календар учня</h2>
+            <h2 className={styles.title}>Викладачам: Календар завдань</h2>
 
             <div className={styles.calendarSection}>
                 <div className={styles.calendarBox}>

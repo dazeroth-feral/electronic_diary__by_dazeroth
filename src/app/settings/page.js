@@ -2,7 +2,7 @@
 
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
-import styles from '@/styles/pages/ProfileSettingsPage.module.css';
+import styles from '@/styles/pages/profile-settings.module.css';
 
 export default function ProfileSettingsPage() {
   const { data: session } = useSession();

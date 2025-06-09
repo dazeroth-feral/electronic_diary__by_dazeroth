@@ -1,4 +1,6 @@
-import styles from '@/styles/pages/VisitorDisciplinesPage.module.css';
+'use client';
+
+import styles from '@/styles/pages/visitor-disciplines.module.css';
 
 export default function VisitorDisciplinesPage() {
   return (
@@ -20,7 +22,7 @@ export default function VisitorDisciplinesPage() {
         ].map((item, i) => (
           <div className={styles.listItem} key={i}>
             <span>{item}</span>
-            <button className={styles.inviteBtn}>Надіслати запрошення</button>
+            <button onClick={() => {alert("Ви не є учасником платформи, тому можливості надати вам доступ до певної школи, чи дисципліни - нема.", "Не можливо доєднатись.");}} className={styles.inviteBtn}>Надіслати запрошення</button>
           </div>
         ))}
       </div>
