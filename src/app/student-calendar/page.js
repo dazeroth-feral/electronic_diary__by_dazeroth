@@ -5,84 +5,17 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import styles from '@/styles/pages/student-calendar.module.css';
 
-const all_tasks = [
-    {
-        "taks_id": 0,
-        "taks_name": "task 1",
-        "task_description": "task 1 desc",
-        "task_from_discipline_id": 1,
-        "task_add_date": "10.10.2025"
-    }
-];
-
-const all_desceplines = [
-    {
-        "id": 1,
-        "name": "Математика (Міжгір’я, ЗОШ ІІІ ст. №1)"
-    },
-    {
-        "id": 2,
-        "name": "Математика (МЕГУ)"
-    },
-    {
-        "id": 3,
-        "name": "Вища математика (МЕГУ)"
-    },
-    {
-        "id": 4,
-        "name": "Математика (Запоріжжя, ЗОШ №101)"
-    },
-    {
-        "id": 5,
-        "name": "Математика (Міжгір’я ЗОШ ІІІ ст. №1)"
-    }
-];
-
-const user_data = [
-    {
-        "id": 1,
-        "name": "dazeroth",
-        "phone": "+380984932106",
-        "gender": "male",
-        "email": "dazeroth.feral@gmail.com",
-        "description": "test1",
-        "avatar": "",
-        "schools": [
-            1,
-            2
-        ],
-        "desciplines": [
-            1,
-            2,
-            3,
-            4,
-            5
-        ]
-    },
-    {
-        "id": 2,
-        "name": "dazeroth",
-        "phone": "+380984932106",
-        "gender": "male",
-        "email": "dazeroth.feral@gmail.com",
-        "description": "test",
-        "avatar": "",
-        "schools": [
-            1,
-            2
-        ],
-        "desciplines": [
-            1,
-            2
-        ]
-    }
-];
-
 export default function StudentCalendar() {
+    const daysInMonth = 30;
+
+    let disciplines_mass = [];
+    let days_mass = [];
+
     const { data: session, status } = useSession();
 
-    const [disciplines, setDisciplines] = useState([]);
-    const [tasks, setTasks] = useState([]);
+    const [all_disciplines, setDisciplines] = useState([]);
+    const [all_tasks, setTasks] = useState([]);
+    const [user_data, set__user_data] = useState([]);
     const [selectedDisciplineId, setSelectedDisciplineId] = useState(null);
     const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
 
@@ -91,117 +24,101 @@ export default function StudentCalendar() {
         'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'
     ];
 
-
     useEffect(() => {
-        if (status === 'authenticated') {
-            const userId = session.user.id;
+        if (status === 'authenticated' && session?.user?.id) {
+            Promise.all([
+                fetch('/api/student-calendar').then(res => res.json()),
+                fetch(`/api/user/${session.user.id}`).then(res => res.json()),
+            ]).then(([tasks, user]) => {
+                let currentUser;
 
-            // Отримати всіх користувачів (щоб дістати дисципліни користувача)
-            fetch('/api/student-calendar')
-                .then(res => res.json())
-                .then(users => {
-                    const currentUser = users.find(u => u.id === userId);
-                    if (!currentUser) return;
+                if (user.id == session.user.id) {
+                    currentUser = user;
+                };
+                if (!currentUser) return;
 
-                    // Тепер отримати всі дисципліни
-                    fetch('/api/all-disciplines')
-                        .then(res => res.json())
-                        .then(allDisciplines => {
-                            const userDisciplines = allDisciplines.filter(d =>
-                                currentUser.desciplines.includes(d.id)
-                            );
+                set__user_data(user)
+                setTasks(tasks);
 
-                            // Стандартизуємо формат
-                            const formatted = userDisciplines.map(d => ({
-                                discipline_id: d.id,
-                                discipline_name: d.name,
-                                school: '' // якщо є school — додай сюди
-                            }));
-
-                            setDisciplines(formatted);
-                        });
-                });
-
-            // Отримати всі таски
-            fetch('/api/all-tasks')
-                .then(res => res.json())
-                .then(setTasks);
+                fetch(`/api/student-all-disciplines?id=${session.user.id}`)
+                    .then(res => res.json())
+                    .then(allDisciplines => setDisciplines(allDisciplines))
+                    .catch(err => console.error("Помилка при завантаженні дисциплін:", err));
+            });
         }
     }, [status, session]);
 
-    const daysInMonth = 30;
-
-    let desciplines_mass = [];
-
-    if (session) {
-        for (let i = 0; i < user_data.length; i++) {
-            if (user_data[i].id == session.user.id) {
-                for (let j = 0; j < user_data[i].desciplines.length; j++) {
-                    if (user_data[i].desciplines[j] == all_desceplines[j].id) {
-                        desciplines_mass.push(
-                            <div key={all_desceplines[j].id} className={styles.subjectBtn}>
-                                {all_desceplines[j].name}
-                            </div>
-                        )
-                    };
-                };
-            }
-        };
-
-    }
+    if (status === 'loading') return <div>Завантаження...</div>;
+    if (status === 'unauthenticated') return <div>Увійдіть у систему</div>;
 
     return (
         <div className={styles.container}>
             <h2 className={styles.title}>Учням: Календар учня</h2>
 
             <div className={styles.calendarSection}>
-                {/* КАЛЕНДАР */}
                 <div className={styles.calendarBox}>
-                    <div className={styles.title}>Місяць: {months[selectedMonth]}</div>
-                    {Array.from({ length: daysInMonth }, (_, i) => {
-                        const dayStr = String(i + 1).padStart(2, '0');
-                        const task = tasks.find(
-                            t =>
-                                t.task_from_discipline_id === selectedDisciplineId &&
-                                t.task_add_date.startsWith(dayStr) &&
-                                Number(t.task_add_date.split('.')[1]) === selectedMonth + 1
-                        );
-                        const isHighlighted = Boolean(task);
+                    {months[selectedMonth]}
+                    <br />
+                    {[...Array(daysInMonth)].map((_, i) => {
+                        const day = i + 1;
+                        const dayStr = String(day).padStart(2, '0');
+                        const monthStr = String(selectedMonth + 1).padStart(2, '0');
 
-                        return isHighlighted ? (
-                            <Link
-                                key={`day-${i}-${selectedDisciplineId}`}
-                                href={`/student/task/${task.taks_id}`}
-                                className={`${styles.day} ${styles.activeDay}`}
-                            >
-                                {dayStr}
-                            </Link>
-                        ) : (
-                            <div key={`day-${i}-${selectedDisciplineId}`} className={styles.day}>
-                                {dayStr}
-                            </div>
-                        );
+                        const tasksForDay = all_tasks.filter(task => {
+                            const task_day = task.task_add_date.slice(0, 2);
+                            const task_month = task.task_add_date.slice(3, 5);
+                            const isSameDate = task_day === dayStr && task_month === monthStr;
+                            const isSameDiscipline =
+                                selectedDisciplineId !== null &&
+                                task.task_from_discipline_id === selectedDisciplineId;
+                            return isSameDate && isSameDiscipline;
+                        });
+
+                        if (tasksForDay.length > 0) {
+                            const task = tasksForDay[0];
+                            return (
+                                <Link
+                                    key={`day-${day}-${selectedDisciplineId}`}
+                                    href={`/student/task/${task.task_id}`}
+                                    className={`${styles.day} ${styles.activeDay}`}
+                                >
+                                    {day}
+                                </Link>
+                            );
+                        } else {
+                            return (
+                                <div
+                                    key={`day-${day}-${selectedDisciplineId}`}
+                                    className={styles.day}
+                                >
+                                    {day}
+                                </div>
+                            );
+                        }
                     })}
                 </div>
 
-                {/* ДИСЦИПЛІНИ */}
                 <div className={styles.subjectsBox}>
-                    {/* {disciplines.map(d => (
-                        <button
-                            key={d.discipline_id}
-                            className={styles.subjectBtn}
-                            onClick={() => setSelectedDisciplineId(d.discipline_id)}
-                        >
-                            {d.discipline_name}
-                        </button>
-                    ))} */}
-                    {
-                        desciplines_mass
-                    }
+                    {user_data?.disciplines &&
+                        all_disciplines.length > 0 &&
+                        user_data.disciplines.map((disciplineId, idx) => {
+                            const discipline = all_disciplines.find(d => d.id === disciplineId);
+                            if (!discipline) return null;
+
+                            return (
+                                <div
+                                    key={discipline.id}
+                                    onClick={() => { setSelectedDisciplineId(discipline.id); console.log(selectedDisciplineId) }}
+                                    className={`${styles.subjectBtn} ${discipline.id === selectedDisciplineId ? styles.active__subjectBtn : ""
+                                        }`}
+                                >
+                                    {discipline.name}
+                                </div>
+                            );
+                        })}
                 </div>
             </div>
 
-            {/* ШКАЛА РОКУ З МІСЯЦЯМИ */}
             <div className={styles.yearRow}>
                 <span className={styles.year}>2025</span>
                 <div className={styles.monthsBox}>

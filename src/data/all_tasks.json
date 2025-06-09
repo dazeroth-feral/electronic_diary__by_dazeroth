@@ -3,7 +3,14 @@
         "taks_id": 0,
         "taks_name": "task 1",
         "task_description": "task 1 desc",
-        "task_from_discipline_id": 0,
+        "task_from_discipline_id": 1,
         "task_add_date": "10.10.2004"
+    },
+    {
+        "taks_id": 1,
+        "taks_name": "task 2",
+        "task_description": "task 2 desc",
+        "task_from_discipline_id": 1,
+        "task_add_date": "25.10.2004"
     }
 ]

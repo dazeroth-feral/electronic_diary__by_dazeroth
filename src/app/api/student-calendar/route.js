@@ -1,4 +1,3 @@
-// /api/all-tasks/route.js
 import fs from 'fs';
 import path from 'path';
 import { NextResponse } from 'next/server';
