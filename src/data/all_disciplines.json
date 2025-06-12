@@ -1,31 +1,49 @@
 [
     { 
+        "id": 0,
+        "teacher_ids": [0, 1],
+        "name": "test",
+        "description": "test",
+        "from_school_name": "(test)",
+        "from_school_id": 999
+    },
+    { 
         "id": 1,
+        "teacher_ids": [0],
         "name": "Математика",
+        "description": "test",
         "from_school_name": "(Міжгір’я, ЗОШ ІІІ ст. №1)",
         "from_school_id": 0
     },
     {
         "id": 2,
+        "teacher_ids": [1],
         "name": "Математика",
+        "description": "test",
         "from_school_name": "(МЕГУ)",
         "from_school_id": 1
     },
     {
         "id": 3,
+        "teacher_ids": [1],
         "name": "Вища математика",
+        "description": "test",
         "from_school_name": "(МЕГУ)",
         "from_school_id": 1
     },
     {
         "id": 4,
+        "teacher_ids": [1],
         "name": "Математика",
+        "description": "test",
         "from_school_name": "(Запоріжжя, ЗОШ №101)",
         "from_school_id": 999
     },
     {
         "id": 5,
+        "teacher_ids": [1],
         "name": "Українська Мова",
+        "description": "test",
         "from_school_name": "(Міжгір’я, ЗОШ ІІІ ст. №1)",
         "from_school_id": 0
     }

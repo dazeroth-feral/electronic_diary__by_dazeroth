@@ -22,7 +22,7 @@ export default function Schools(req) {
         if (status === 'authenticated' && session?.user?.id) {
             Promise.all([
                 fetch(`/api/student-schools?id=${session.user.id}`).then(res => res.json()),
-                fetch(`/api/student-all-disciplines-from-school`).then(res => res.json())
+                fetch(`/api/all-disciplines`).then(res => res.json())
             ]).then(([school, disciplines_all_data]) => {
                 let current_user = session.user.id;
 
